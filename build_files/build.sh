@@ -47,7 +47,7 @@ systemctl enable podman.socket
 systemctl --global enable dsearch
 systemctl --global enable dms
 
-systemctl disable gdm lightdm sddm
+systemctl disable gdm
 systemctl enable greetd
 
 mkdir -p /var/cache/dms-greeter
