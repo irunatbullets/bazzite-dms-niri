@@ -19,6 +19,28 @@ dnf5 install -y tmux
 # Disable COPRs so they don't end up enabled on the final image:
 # dnf5 -y copr disable ublue-os/staging
 
+dnf5 -y copr enable avengemedia/dms
+dnf5 -y copr enable avengemedia/danklinux
+
+dnf5 -y install \
+	breakpad \
+	cliphist \
+	danksearch \
+	dgop \
+	dms \
+	dms-greeter \
+	ghostty \
+	material-symbols-fonts \
+	matugen \
+	wl-clipboard \
+	niri \
+	xwayland-satellite
+
+dnf5 -y copr disable avengemedia/dms
+dnf5 -y copr disable avengemedia/danklinux
+
 #### Example for enabling a System Unit File
 
 systemctl enable podman.socket
+systemctl --global enable dms-greeter-init.service
+systemctl --global enable dsearch

@@ -1,0 +1,15 @@
+[Unit]
+Description=Initialize DMS greeter
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/bash -c '\
+if [ ! -f "$HOME/.config/dms/.greeter-enabled" ]; then \
+    dms greeter enable && \
+    mkdir -p "$HOME/.config/dms" && \
+    touch "$HOME/.config/dms/.greeter-enabled"; \
+fi'
+
+[Install]
+WantedBy=default.target
