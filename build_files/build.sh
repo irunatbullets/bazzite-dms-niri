@@ -23,6 +23,7 @@ dnf5 -y copr enable avengemedia/dms
 dnf5 -y copr enable avengemedia/danklinux
 
 dnf5 -y install \
+	acl \
 	breakpad \
 	cliphist \
 	danksearch \
@@ -32,8 +33,9 @@ dnf5 -y install \
 	ghostty \
 	material-symbols-fonts \
 	matugen \
-	wl-clipboard \
 	niri \
+	quickshell \
+	wl-clipboard \
 	xwayland-satellite
 
 dnf5 -y copr disable avengemedia/dms
@@ -45,5 +47,7 @@ systemctl enable podman.socket
 systemctl --global enable dsearch
 systemctl --global enable dms
 
-systemctl disable gdm
+systemctl disable gdm lightdm sddm
 systemctl enable greetd
+
+mkdir -p /var/cache/dms-greeter
