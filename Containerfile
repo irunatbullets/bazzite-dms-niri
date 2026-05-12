@@ -32,8 +32,6 @@ FROM ghcr.io/ublue-os/bazzite-gnome:stable
 COPY system_files/etc/ /etc/
 COPY system_files/usr/ /usr/
 
-RUN useradd -r -M -s /usr/sbin/nologin greeter
-
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \

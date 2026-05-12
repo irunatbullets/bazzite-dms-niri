@@ -45,6 +45,9 @@ dnf5 -y copr disable avengemedia/danklinux
 #### Example for enabling a System Unit File
 
 systemctl enable podman.socket
+
+systemctl --global enable bazzite-user-bootstrap.service
+
 systemctl --global enable dsearch
 systemctl --global enable dms
 
@@ -52,6 +55,4 @@ systemctl disable gdm
 systemctl enable greetd
 
 mkdir -p /var/cache/dms-greeter
-
-systemctl --global enable bazzite-user-bootstrap.service
 
