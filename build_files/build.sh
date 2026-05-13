@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -ouex pipefail
+cp -avf /ctx/files/. /
 
 ### Install packages
 
@@ -31,28 +32,31 @@ dnf5 -y install \
     dgop \
     dms \
     dms-greeter \
-    fd-find \
-    fzf \
     ghostty \
     material-symbols-fonts \
     matugen \
     niri \
     quickshell \
-    ripgrep \
     wl-clipboard \
     xwayland-satellite
 
 dnf5 -y copr disable avengemedia/dms
 dnf5 -y copr disable avengemedia/danklinux
 
-#### Example for enabling a System Unit File
+### Example for enabling a System Unit File (I'll just leave this here for now)
 
 systemctl enable podman.socket
 
+### Add single-run bootstrap for adding the proper default niri configs for dms
+
 systemctl --global enable bazzite-user-bootstrap.service
+
+### Setup dms and dms-search
 
 systemctl --global enable dsearch
 systemctl --global enable dms
+
+### Setup dms-greeter
 
 systemctl disable gdm
 systemctl enable greetd
