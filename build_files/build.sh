@@ -36,6 +36,9 @@ dnf5 -y install \
     matugen \
     niri \
     qt6-qt5compat \
+    qt6-qtimageformats \
+    qt6-qtmultimedia \
+    qt6-qtsvg \
     quickshell \
     wl-clipboard \
     xwayland-satellite
