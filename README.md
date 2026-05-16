@@ -36,7 +36,7 @@ I borrowed this line from bazzirco, which is an image that blends Zirconium and
 Bazzite.
 
 ```
-# REQUIRED for dms-greeter to work (taken from bazzirco)
+# REQUIRED for dms-greeter to work
 tee /usr/lib/sysusers.d/greeter.conf <<'EOF'
 g greeter 767
 u greeter 767 "Greetd greeter"
