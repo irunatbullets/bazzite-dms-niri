@@ -61,11 +61,14 @@ systemctl enable greetd
 
 mkdir -p /var/cache/dms-greeter
 
-# REQUIRED for dms-greeter to work (taken from bazzirco)
+# REQUIRED for dms-greeter to work
 tee /usr/lib/sysusers.d/greeter.conf <<'EOF'
 g greeter 767
-u greeter 767 "Greetd greeter"
+u greeter 767 "Greetd greeter" /var/lib/greeter /usr/sbin/nologin
 EOF
+
+mkdir -p /var/lib/greeter
+chown 767:767 /var/lib/greeter
 
 mkdir -p /usr/lib/systemd/user/graphical-session.target.wants
 ln -s /usr/lib/systemd/user/dms-niri-config.service \
