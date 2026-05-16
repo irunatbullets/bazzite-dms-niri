@@ -64,7 +64,7 @@ mkdir -p /var/cache/dms-greeter
 # REQUIRED for dms-greeter to work
 tee /usr/lib/sysusers.d/greeter.conf <<'EOF'
 g greeter 767
-u greeter 767 "Greetd greeter" /var/lib/greeter /usr/sbin/nologin
+u greeter 767 "greetd greeter" /var/lib/greeter
 EOF
 
 mkdir -p /var/lib/greeter
