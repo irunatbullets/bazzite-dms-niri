@@ -40,11 +40,34 @@ dnf5 -y install \
     qt6-qtmultimedia \
     qt6-qtsvg \
     quickshell \
-    wl-clipboard \
-    xwayland-satellite
+    wl-clipboard
 
 dnf5 -y copr disable avengemedia/dms
 dnf5 -y copr disable avengemedia/danklinux
+
+### Build fresh xwayland-satellite
+dnf5 -y install rust cargo @development-tools dbus-devel xcb-util-cursor-devel clang git
+
+(
+    export CARGO_HOME=/tmp/cargo
+    export RUSTUP_HOME=/tmp/rustup
+    export CARGO_INSTALL_ROOT=/usr
+
+    # Build xwayland-satellite from specific commit
+    cd /tmp
+    git clone https://github.com/Supreeeme/xwayland-satellite.git
+    cd xwayland-satellite
+    git checkout a879e5e
+
+    cargo build --release
+
+    # Copy binary to same place as cargo install (/usr/bin)
+    install -Dm755 target/release/xwayland-satellite /usr/bin/xwayland-satellite
+)
+
+### Clean up build artifacts and dev packages
+rm -rf /tmp/cargo /tmp/rustup /tmp/xwayland-satellite
+dnf5 -y remove rust cargo @development-tools dbus-devel xcb-util-cursor-devel clang git
 
 ### Example for enabling a System Unit File (I'll just leave this here for now)
 
