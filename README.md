@@ -30,13 +30,19 @@ dms greeter sync
 I would like to automate this in future but I'm simply not smart or patient
 enough to do it at the moment.
 
+## For flatpak theme support
+
+```
+sudo flatpak override --filesystem=xdg-config/gtk-3.0:rw --filesystem=xdg-config/gtkrc-2.0:rw --filesystem=xdg-config/gtk-4.0:rw --filesystem=xdg-config/gtkrc:rw
+```
+
 ## Confessions
 
 I borrowed this line from bazzirco, which is an image that blends Zirconium and
 Bazzite.
 
 ```
-# REQUIRED for dms-greeter to work (taken from bazzirco)
+# REQUIRED for dms-greeter to work
 tee /usr/lib/sysusers.d/greeter.conf <<'EOF'
 g greeter 767
 u greeter 767 "Greetd greeter"
