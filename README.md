@@ -33,7 +33,7 @@ enough to do it at the moment.
 ## For flatpak theme support
 
 ```
-flatpak override --filesystem=xdg-config/gtk-3.0:rw --filesystem=xdg-config/gtkrc-2.0:rw --filesystem=xdg-config/gtk-4.0:rw --filesystem=xdg-config/gtkrc:rw
+sudo flatpak override --filesystem=xdg-config/gtk-3.0:rw --filesystem=xdg-config/gtkrc-2.0:rw --filesystem=xdg-config/gtk-4.0:rw --filesystem=xdg-config/gtkrc:rw
 ```
 
 ## Confessions
