@@ -19,8 +19,8 @@ on:
 
 env:
   IMAGE_DESC: "My Customized Universal Blue Image"
-  IMAGE_KEYWORDS: "bootc,ublue,universal-blue"
-  IMAGE_LOGO_URL: "https://avatars.githubusercontent.com/u/120078124?s=200&v=4"
+  IMAGE_KEYWORDS: "bootc,ublue,universal-blue,niri,dms"
+  IMAGE_LOGO_URL: "https://avatars.githubusercontent.com/u/344908?v=4"
   IMAGE_NAME: "${{ github.event.repository.name }}"
   IMAGE_REGISTRY: "ghcr.io/${{ github.repository_owner }}"
   DEFAULT_TAG: "latest"
@@ -40,15 +40,12 @@ jobs:
         include:
           - variant:
             base_image: ghcr.io/ublue-os/bazzite-gnome:stable
-
           - variant: nvidia
             base_image: ghcr.io/ublue-os/bazzite-gnome-nvidia:stable
-
           - variant: dx
             base_image: ghcr.io/ublue-os/bazzite-dx-gnome:stable
-
           - variant: dx-nvidia
-            base_image: ghcr.io/ublue-os/bazzite-dx-gnome-nvidia:stable
+            base_image: ghcr.io/ublue-os/bazzite-dx-nvidia-gnome:stable
 
     permissions:
       contents: read
@@ -66,13 +63,6 @@ jobs:
 
       - name: Maximize build space
         uses: ublue-os/remove-unwanted-software@695eb75bc387dbcd9685a8e72d23439d8686cba6
-
-      - name: Login to GHCR
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Get current date
         id: date
