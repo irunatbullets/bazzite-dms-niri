@@ -1,11 +1,12 @@
 # Interlace
 
-This custom Bazzite image is based on `bazzite-gnome`. It includes Dank Material
-Shell and niri along with all of the recommended extras for Dank Linux.
+This custom **Bazzite** image is based on `bazzite-gnome`. It includes **Dank
+Material Shell** and **niri** along with all of the recommended extras for
+Dank Linux.
 
 My goal with this image is to offer a vanilla DMS/niri experience with gaming
-capabilities (via Bazzite). I have added ghostty as the default termianl along
-with tools to allow developers to create their own DMS plugins.
+capabilities (via Bazzite). I have added **ghostty** as the default termianl
+along with tools to allow developers to create their own DMS plugins.
 
 Feel free to suggest additional software - or just fork this repo and do
 whatever you like.
