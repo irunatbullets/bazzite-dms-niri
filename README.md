@@ -18,14 +18,6 @@ sudo bootc switch ghcr.io/irunatbullets/interlace
 sudo bootc switch ghcr.io/irunatbullets/interlace-nvidia
 ```
 
-I have also included these two variants based on `bazzite-dx-gnome`, for people
-who might need more developement tools:
-
-```
-sudo bootc switch ghcr.io/irunatbullets/interlace-dx
-sudo bootc switch ghcr.io/irunatbullets/interlace-dx-nvidia
-```
-
 **Important Note:** After switching to this image the login will backup any
 existing niri configutation and replace it with standard dms niri configs.
 Updates will not retrigger this event.

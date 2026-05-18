@@ -42,11 +42,11 @@ jobs:
           - variant: nvidia
             base_image: ghcr.io/ublue-os/bazzite-gnome-nvidia:stable
 
-          - variant: dx
-            base_image: ghcr.io/ublue-os/bazzite-dx-gnome:stable
+          # - variant: dx
+          #   base_image: ghcr.io/ublue-os/bazzite-dx-gnome:stable
 
-          - variant: dx-nvidia
-            base_image: ghcr.io/ublue-os/bazzite-dx-nvidia-gnome:stable
+          # - variant: dx-nvidia
+          #   base_image: ghcr.io/ublue-os/bazzite-dx-nvidia-gnome:stable
 
     permissions:
       contents: read
