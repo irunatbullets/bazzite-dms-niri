@@ -73,6 +73,7 @@ EOF
 mkdir -p /var/lib/greeter
 chown 767:767 /var/lib/greeter
 
+### Setup user services
 mkdir -p /usr/lib/systemd/user/graphical-session.target.wants
 ln -s /usr/lib/systemd/user/dms-niri-config.service \
     /usr/lib/systemd/user/graphical-session.target.wants/dms-niri-config.service
