@@ -62,7 +62,7 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           containerfiles: ./Containerfile
-          image: ${{ env.IMAGE_NAME }}${{ matrix.variant && format('-%s', matrix.variant) || '' }}
+          image: ${{ env.IMAGE_NAME }}${{ matrix.variant && format('-{0}', matrix.variant) || '' }}
           build-args: |
             BASE_IMAGE=${{ matrix.base_image }}
           oci: false
@@ -73,7 +73,7 @@ jobs:
         uses: redhat-actions/push-to-registry@v2
         with:
           registry: ${{ env.IMAGE_REGISTRY }}
-          image: ${{ env.IMAGE_NAME }}${{ matrix.variant && format('-%s', matrix.variant) || '' }}
+          image: ${{ env.IMAGE_NAME }}${{ matrix.variant && format('-{0}', matrix.variant) || '' }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
@@ -83,13 +83,10 @@ jobs:
         with:
           cosign-release: v2.6.3
 
-      - name: Sign Image (FIXED)
+      - name: Sign Image
         if: github.event_name != 'pull_request'
         run: |
           IMAGE="${IMAGE_REGISTRY}/${IMAGE_NAME}${VARIANT}"
-
-          echo "Signing: ${IMAGE}"
-
           cosign sign -y --key env://COSIGN_PRIVATE_KEY \
             "${IMAGE}@${DIGEST}"
         env:
@@ -97,6 +94,6 @@ jobs:
           COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }}
           IMAGE_REGISTRY: ${{ env.IMAGE_REGISTRY }}
           IMAGE_NAME: ${{ env.IMAGE_NAME }}
-          VARIANT: ${{ matrix.variant && format('-%s', matrix.variant) || '' }}
+          VARIANT: ${{ matrix.variant && format('-{0}', matrix.variant) || '' }}
           DIGEST: ${{ steps.push.outputs.digest }}
 
