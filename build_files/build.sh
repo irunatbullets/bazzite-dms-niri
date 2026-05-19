@@ -1,7 +1,7 @@
 #!/bin/bash
 set -ouex pipefail
 
-IMAGE_NAME="${IMAGE_NAME:-interlace}"
+IMAGE_NAME="${IMAGE_NAME:-lain}"
 IMAGE_VARIANT="${IMAGE_VARIANT:-}"
 
 if [ -z "$IMAGE_VARIANT" ]; then
