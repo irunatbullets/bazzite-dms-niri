@@ -19,7 +19,6 @@ dnf5 -y copr enable avengemedia/danklinux
 
 dnf5 -y install \
     acl \
-    alacritty \
     breakpad \
     cliphist \
     cava \
@@ -31,8 +30,6 @@ dnf5 -y install \
     material-symbols-fonts \
     matugen \
     niri \
-    qt5ct \
-    qt6ct \
     qt6-qt5compat \
     qt6-qtimageformats \
     qt6-qtmultimedia \
