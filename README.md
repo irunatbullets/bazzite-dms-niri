@@ -44,7 +44,12 @@ sudo flatpak override \
 --filesystem=xdg-config/gtkrc:rw
 ```
 
-## Credits:
+## Extra applications
+
+- **ghostty**
+- **bluetui** - a terminal application for configuring multiple Bluetooth receivers.
+
+## Credits
 
 - https://bazzite.gg/
 - https://danklinux.com/
