@@ -23,7 +23,16 @@ sudo bootc switch ghcr.io/irunatbullets/bazzite-dms-niri-nvidia
 existing niri configutation and replace it with standard dms niri configs.
 Updates will not retrigger this event.
 
-**Also:** To enable background image syncing with the dms greeter, run the
+## What my selection of additional applications achieve
+
+- **ghostty** - nothing, I just switched to it when I started using dms.
+- **bluetui** - an application for configuring multiple Bluetooth receivers.
+
+## Known issues and workarounds
+
+### How do I change the dms greeter's background?!
+
+To enable background image syncing with the dms greeter, run the
 following from your terminal and follow the steps:
 
 ```
@@ -32,9 +41,9 @@ dms greeter sync
 I would like to automate this in future but I'm simply not smart or patient
 enough to do it at the moment.
 
-## Flatpak theme support
+### Matugen isn't themeing my flatpak apps!
 
-Mutagen can theme flatpaks by running the following (restart any running apps):
+Matugen can theme flatpaks by running the following (restart any running apps):
 
 ```
 sudo flatpak override \
@@ -44,15 +53,10 @@ sudo flatpak override \
 --filesystem=xdg-config/gtkrc:rw
 ```
 
-## Extra applications
-
-- **ghostty**
-- **bluetui** - a terminal application for configuring multiple Bluetooth receivers.
-
-## Known issues and workarounds
-
 ### The capslock indicator widget doesn't work!
-You have to add yourself to the `input` group like this, and then reboot:
+
+You have to create and add yourself to the `input` group like this, and then
+reboot:
 
 ```
 sudo sh -c 'getent group input >> /etc/group'
