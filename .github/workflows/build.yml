@@ -69,11 +69,11 @@ jobs:
         id: metadata
         uses: docker/metadata-action@v6
         with:
-          images: ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}${{ matrix.variant && format('-{0}', matrix.variant) || '' }}
           tags: |
             type=raw,value=${{ env.DEFAULT_TAG }}
-            type=raw,value=${{ env.DEFAULT_TAG }}.${{ steps.date.outputs.date }}
-            type=raw,value=${{ steps.date.outputs.date }}
+            type=raw,value=${{ env.DEFAULT_TAG }}.{{date 'YYYYMMDD'}}
+            type=raw,value={{date 'YYYYMMDD'}}
             type=sha,enable=${{ github.event_name == 'pull_request' }}
             type=ref,event=pr
           labels: |
@@ -82,7 +82,7 @@ jobs:
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
             org.opencontainers.image.title=${{ env.IMAGE_NAME }}
             org.opencontainers.image.vendor=${{ github.repository_owner }}
-            org.opencontainers.image.version=${{ env.DEFAULT_TAG }}
+            org.opencontainers.image.version=${{ env.DEFAULT_TAG }}.{{date 'YYYYMMDD'}}
 
       - name: Build Image
         id: build
@@ -90,6 +90,8 @@ jobs:
         with:
           containerfiles: ./Containerfile
           image: ${{ env.IMAGE_NAME }}${{ matrix.variant && format('-{0}', matrix.variant) || '' }}
+          tags: ${{ steps.metadata.outputs.tags }}
+          labels: ${{ steps.metadata.outputs.labels }}
           build-args: |
             BASE_IMAGE=${{ matrix.base_image }}
           oci: false
@@ -109,6 +111,7 @@ jobs:
         with:
           registry: ${{ env.IMAGE_REGISTRY }}
           image: ${{ env.IMAGE_NAME }}${{ matrix.variant && format('-{0}', matrix.variant) || '' }}
+          tags: ${{ steps.metadata.outputs.tags }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
@@ -118,17 +121,17 @@ jobs:
         with:
           cosign-release: v2.6.3
 
-      - name: Cosign login to GHCR
+      - name: Sign container image
         if: github.event_name != 'pull_request'
         run: |
-          IMAGE="${IMAGE_REGISTRY}/${IMAGE_NAME}${VARIANT}"
-          cosign sign -y --key env://COSIGN_PRIVATE_KEY \
-            "${IMAGE}@${DIGEST}"
+          IMAGE_FULL="${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}${VARIANT}"
+
+          for tag in ${{ steps.metadata.outputs.tags }}; do
+            cosign sign -y --key env://COSIGN_PRIVATE_KEY \
+              "${IMAGE_FULL}:${tag}"
+          done
         env:
           COSIGN_EXPERIMENTAL: false
           COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }}
-          IMAGE_REGISTRY: ${{ env.IMAGE_REGISTRY }}
-          IMAGE_NAME: ${{ env.IMAGE_NAME }}
           VARIANT: ${{ matrix.variant && format('-{0}', matrix.variant) || '' }}
-          DIGEST: ${{ steps.push.outputs.digest }}
 
