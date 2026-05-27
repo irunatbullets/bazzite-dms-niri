@@ -55,12 +55,10 @@ sudo flatpak override \
 
 ### The capslock indicator widget doesn't work!
 
-You have to create and add yourself to the `input` group like this, and then
-reboot:
+You have to add yourself to the `input` group like this, and then reboot.
 
 ```
-sudo sh -c 'getent group input >> /etc/group'
-sudo usermod -aG input $USER
+ujust add-user-to-input-group
 ```
 
 ## Credits:
