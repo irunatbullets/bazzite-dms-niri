@@ -124,14 +124,16 @@ jobs:
       - name: Sign container image
         if: github.event_name != 'pull_request'
         run: |
-          IMAGE_FULL="${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}${VARIANT}"
+          IMAGE_BASE="${IMAGE_REGISTRY}/${IMAGE_NAME}${VARIANT}"
 
-          for tag in ${{ steps.metadata.outputs.tags }}; do
-            cosign sign -y --key env://COSIGN_PRIVATE_KEY \
-              "${IMAGE_FULL}:${tag}"
+          echo '${{ steps.metadata.outputs.json }}' | jq -r '.tags[]' | while read -r tag; do
+            echo "Signing $tag"
+            cosign sign -y --key env://COSIGN_PRIVATE_KEY "$tag"
           done
         env:
           COSIGN_EXPERIMENTAL: false
           COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }}
+          IMAGE_REGISTRY: ${{ env.IMAGE_REGISTRY }}
+          IMAGE_NAME: ${{ env.IMAGE_NAME }}
           VARIANT: ${{ matrix.variant && format('-{0}', matrix.variant) || '' }}
 
